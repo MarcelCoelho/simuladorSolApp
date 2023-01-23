@@ -1,0 +1,39 @@
+<div class="menu">
+
+  <div class="titulo">
+    <div class="row">
+      <div class="col">
+        <h4>Emulador - <small> Grabar Documento Sol</small></h4>
+      </div>
+    </div>
+  </div>
+
+  <div class="filtro">
+    <div class="row">
+
+      <div class="col">
+        <input type="text" pInputText placeholder="Codigo Rota" [(ngModel)]="codigoRota" />
+      </div>
+
+      <div class="col">
+
+        <p-dropdown [options]="delegacoesDropDown" [(ngModel)]="delegacaoSelecionada" optionLabel="name"
+          optionValue="code" [style]="{'width':'10rem'}" (onkeypress)="onKeyUp($event)" [filter]="false"></p-dropdown>
+        <!-- <input type="text" pInputText placeholder="Delegacao Rota" [(ngModel)]="delegacaoRota" /> -->
+      </div>
+
+      <div class="col">
+        <p-calendar dateFormat="dd/mm/yy" placeholder="Data Rota" [(ngModel)]="dataRota"></p-calendar>
+      </div>
+
+      <div class="col">
+        <button pButton type="button" label="Buscar Ruta" (click)="buscarRuta()"></button>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="menu-lateral-direito">
+    <app-counter></app-counter>
+  </div>
+</div>
