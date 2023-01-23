@@ -1,0 +1,52 @@
+<div *ngIf="ot !== undefined">
+
+  <div class="formulario">
+
+    <app-input-custom [value]="ot.workOrderId" title="Identificador OT: " disabled=true></app-input-custom>
+
+    <app-input-custom [value]="ot.branchGECode" title="Delegação: " disabled=true></app-input-custom>
+    <app-input-custom [value]="ot.billingEntityGECode" title="Codigo Cliente: " disabled=true></app-input-custom>
+
+    <app-input-custom value="" title="Codigo Documento: " disabled=false maxlength="50"></app-input-custom>
+    <app-input-custom value="" title="Documento ID: " disabled=false maxlength="50"></app-input-custom>
+    <app-input-custom value="" title="Pais: " disabled=false maxlength="2"></app-input-custom>
+    <app-input-custom value="2" title="Codigo Empleo: " disabled=false maxlength="1"></app-input-custom>
+    <app-input-custom value="1" title="Emissor Documento: " disabled=false maxlength="1"></app-input-custom>
+    <app-input-custom value="1" title="Codigo Estado: " disabled=false maxlength="1"></app-input-custom>
+    <app-input-custom value="1" title="Codigo Localização: " disabled=false maxlength="1"></app-input-custom>
+    <app-input-custom value="GENESIS" title="Sistema Origem: " disabled=false></app-input-custom>
+
+    <!-- data servico -->
+    <app-calendar-custom value="" title="Data Serviço: "></app-calendar-custom>
+
+
+
+    <p-panel header="Documentos Teste" [toggleable]="true" [collapsed]="true" class="panelOT"
+      [transitionOptions]="'500ms'">
+
+      <!-- bultos/bolsas/ids independentes -->
+      <table>
+        <thead>
+          <tr>
+            <th>Codigo</th>
+            <th>ID</th>
+            <th><span class="crudDocumento" (click)="addDocumentoMemoria()">+</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let doc of otTeste.documents; let i = index">
+            <td><input type="text" pInputText [(ngModel)]="doc.documentCode" [placeholder]="i + 1" /></td>
+            <td><input type="text" pInputText [(ngModel)]="doc.documentId" [placeholder]="doc.documentId" /></td>
+            <td><span class="crudDocumento" (click)="removerDocumentoMemoria(doc)">-</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </p-panel>
+
+
+    <button pButton type="button" icon="pi pi-check" iconPos="left" (click)="guardarDocumentoBase()">Gravar
+      Documento</button>
+
+  </div>
+</div>

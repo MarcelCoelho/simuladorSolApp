@@ -1,0 +1,31 @@
+.formulario {
+  display: flex;
+  flex-direction: column;
+
+  padding: 1rem;
+  gap: 0.2rem;
+}
+
+.row {
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  margin-top: 2rem;
+  width: 100%;
+}
+
+.panelDocumentoItems {
+  font-size: 0.7rem;
+}
+
+.crudDocumento {
+  font-size: 2rem;
+  margin-left: 0.7rem;
+  cursor: pointer;
+}
+
+.crudDocumento:hover {
+  filter: brightness(0.5);
+}

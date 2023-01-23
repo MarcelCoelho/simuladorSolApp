@@ -1,0 +1,30 @@
+.menu {
+  display: flex;
+  flex-direction: row;
+
+  justify-content: space-between;
+  align-items: center;
+  background-color: aliceblue;
+  padding: 1rem;
+}
+
+.titulo {
+  justify-content: flex-start;
+  margin-left: 2rem;
+}
+
+.filtro {
+  display: flex;
+
+  justify-content: center;
+}
+
+.menu-lateral-direito {
+  display: flex;
+  justify-content: end;
+  margin-right: 2rem;
+}
+
+.col h4 {
+  margin-right: 4rem;
+}

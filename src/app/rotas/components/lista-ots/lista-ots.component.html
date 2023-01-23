@@ -1,0 +1,78 @@
+<div class="content">
+
+  <p-splitter [style]="{'width': '100%'}" [panelSizes]="[50,50]" [minSizes]="[20,20]">
+
+    <!-- lista de ots -->
+    <ng-template pTemplate>
+      <div class="routeData">
+        <div *ngFor="let lap of data.lap">
+
+          <div class="volta">
+
+            <div class="infoRoute">
+              <p>Rota: <span>{{data.route.routeCode}}</span> </p>
+              <p>Volta: <span>{{lap.lapNumber}}</span></p>
+            </div>
+
+            <hr>
+
+            <p-panel header="Ordens de Trabalho" [toggleable]="true" class="panelOT" [transitionOptions]="'500ms'">
+
+              <div *ngFor="let ot of data.workOrders">
+
+                <div *ngIf="lap.lapNumber === ot.lapNumber" (click)="ativarOT(ot)" [class]="getClasseCSS(ot)">
+
+                  <div class="otCardhorizontal">
+
+                    <div class="otData">
+                      <h3>Sec:. <b>{{ ot.sequence}}</b> </h3>
+                    </div>
+
+                    <div class="otData">
+                      <h3> <b>{{ ot.productDescription}}</b> </h3>
+                    </div>
+
+                  </div>
+
+                  <div class="otCardvertical">
+                    <div class="otData">
+                      <h3>Cod:. <b>{{ ot.workOrderCode }}</b></h3>
+                    </div>
+
+                    <div class="separador"></div>
+
+                    <div class="otData">
+                      <h3>Estado:. {{ ot.statusLVCode }} - {{ ot.statusLVDescription }}</h3>
+                    </div>
+
+                    <div class="separador"></div>
+
+                    <div class="otData">
+                      <h3>Envia Proc:. {{ ot.sendProcessGE }}</h3>
+                    </div>
+
+                  </div>
+
+                  <div class="otCardvertical">
+                    <div class="otData">
+                      <h3>Cliente:. {{ ot.billingEntityGECode }} - {{ ot.billingEntityGEDescription }}</h3>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </p-panel>
+
+          </div>
+
+        </div>
+      </div>
+    </ng-template>
+
+    <!-- documento por ot -->
+    <ng-template pTemplate>
+      <app-documento-por-ot [ot]="otSelecionada"></app-documento-por-ot>
+    </ng-template>
+  </p-splitter>
+
+</div>

@@ -1,0 +1,115 @@
+.routeData {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  width: 100%;
+}
+
+.volta {
+  /* display: flex; */
+  color: black;
+  /* flex-direction: column; */
+  /* justify-content: center; */
+  /* align-items: flex-start; */
+
+  /* gap: 0.5rem; */
+  padding: 1rem;
+  /* width: 100%; */
+  background: rgb(240, 228, 228);
+  border-radius: 0.2rem;
+}
+
+.infoRoute {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.infoRoute p {
+  font-size: 1.6rem;
+}
+
+.infoRoute span {
+  font-weight: bold;
+}
+
+hr {
+  width: 100%;
+}
+
+.panelOT {
+  width: 100%;
+}
+
+.otCardSelecionada {
+  display: flex;
+  flex-direction: column;
+
+  /* align-items: center; */
+  justify-content: flex-start;
+  margin-bottom: 0.5rem;
+  width: 100%;
+  padding: 0.5rem;
+  color: black;
+  border-radius: 0.2rem;
+  background-color: #FFD54F;
+  cursor: pointer;
+  border: 2px solid black;
+}
+
+.otCard {
+  display: flex;
+  flex-direction: column;
+
+  /* align-items: center; */
+  justify-content: flex-start;
+  margin-bottom: 0.5rem;
+  width: 100%;
+  padding: 0.5rem;
+  color: black;
+  border-radius: 0.2rem;
+  background-color: #d9dde0;
+  cursor: pointer;
+
+}
+
+.otCard:hover {
+  background-color: #FFD54F;
+  filter: brightness(0.8);
+}
+
+.otCardhorizontal {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid black;
+}
+
+.otData {
+  font-size: 3rem;
+}
+
+.otData h3 {
+  font-size: 0.9rem;
+  margin-bottom: 0.2rem;
+}
+
+.otCardvertical {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.separador {
+  border-right: 1px solid black;
+}
+
+.center {
+  display: flex;
+
+  background-color: black;
+  height: auto;
+  /* width: 0.1rem; */
+  border: 1px solid var(--surface-a);
+}

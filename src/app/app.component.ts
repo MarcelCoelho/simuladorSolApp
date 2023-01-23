@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { RotasService } from './rotas/services/rotas.service';
+import { dias, meses } from './shared/utilities/dados';
 
 
 @Component({
@@ -8,24 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class AppComponent implements OnInit {
-  rutaCodigo: string = '';
+  codigoRota: string = '';
+  delegacaoRota: string = '';
+  dataRota!: Date;
 
-  fechaActual!: Date;
+  constructor(private rotasService: RotasService) { }
 
-  constructor() {}
+  ngOnInit(): void { }
 
-  ngOnInit(): void {}
+  // changeRutaCodigo() {
+  //   console.log(this.rutaCodigo);
+  // }
 
-  changeRutaCodigo() {
-    console.log(this.rutaCodigo);
-  }
+  // changeValueDate() {
+  //   console.log(this.fechaActual);
+  // }
 
-  changeValueDate() {
-    console.log(this.fechaActual);
-  }
 
-  buscarRuta() {
-    alert(this.rutaCodigo + ' - ' +  this.fechaActual);
-  }
-  
+
 }
