@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IRota, branch } from '../interfaces/rotas.interface';
+import { documento, documentoResponse } from '../interfaces/documento.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +33,14 @@ export class RotasService {
     // })
 
     // const response = this.http.get(this.url, { headers, params })
-    const response = this.http.get<IRota>(this.url + '/GetRoute', { params });
+    const response = this.http.get<IRota>(this.url + '/GetRoute', { params })
+    return response;
+
+  }
+
+  gravarDocumento(documento: documento): Observable<documentoResponse> {
+    console.log(documento);
+    const response = this.http.post<documentoResponse>(this.url + '/Document', documento)
     return response;
   }
 }

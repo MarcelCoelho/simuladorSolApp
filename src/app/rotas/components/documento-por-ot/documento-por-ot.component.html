@@ -2,42 +2,138 @@
 
   <div class="formulario">
 
-    <app-input-custom [value]="ot.workOrderId" title="Identificador OT: " disabled=true></app-input-custom>
+    <!-- identificador OT -->
+    <div class="row">
+      <div class="col">
+        <span>Identificador OT:</span>
+      </div>
+      <div class="col">
+        <input type="text" pInputText [(ngModel)]="documento.otId" [disabled]="true" />
+      </div>
+    </div>
 
-    <app-input-custom [value]="ot.branchGECode" title="Delegação: " disabled=true></app-input-custom>
-    <app-input-custom [value]="ot.billingEntityGECode" title="Codigo Cliente: " disabled=true></app-input-custom>
+    <div class="row">
+      <div class="col">
+        <span>Delegação: </span>
+      </div>
+      <div class="col">
+        <input type="text" pInputText [(ngModel)]="documento.delegacionCodigo" [disabled]="true" />
+      </div>
+    </div>
 
-    <app-input-custom value="" title="Codigo Documento: " disabled=false maxlength="50"></app-input-custom>
-    <app-input-custom value="" title="Documento ID: " disabled=false maxlength="50"></app-input-custom>
-    <app-input-custom value="" title="Pais: " disabled=false maxlength="2"></app-input-custom>
-    <app-input-custom value="2" title="Codigo Empleo: " disabled=false maxlength="1"></app-input-custom>
-    <app-input-custom value="1" title="Emissor Documento: " disabled=false maxlength="1"></app-input-custom>
-    <app-input-custom value="1" title="Codigo Estado: " disabled=false maxlength="1"></app-input-custom>
-    <app-input-custom value="1" title="Codigo Localização: " disabled=false maxlength="1"></app-input-custom>
-    <app-input-custom value="GENESIS" title="Sistema Origem: " disabled=false></app-input-custom>
+    <div class="row">
+      <div class="col">
+        <span>Codigo Cliente: </span>
+      </div>
+      <div class="col">
+        <input type="text" pInputText [(ngModel)]="documento.entidadGECodigo" [disabled]="true" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <span>Codigo Documento: </span>
+      </div>
+      <div class="col">
+        <input type="text" pInputText [(ngModel)]="documento.documentoCodigo" maxlength="50" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <span>ID Documento: </span>
+      </div>
+      <div class="col">
+        <input type="text" pInputText [(ngModel)]="documento.documentoId" maxlength="50" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <span>Pais: </span>
+      </div>
+      <div class="col">
+        <input type="text" pInputText [(ngModel)]="documento.paisCodigo" maxlength="2" />
+      </div>
+    </div>
+
+    <app-input-custom [value]="documento.empleoCodigo" title="Codigo Empleo: " disabled=false
+      maxlength="1"></app-input-custom>
+    <app-input-custom [value]="documento.emisorDocumentoCodigo" title="Emissor Documento: " disabled=false
+      maxlength="1"></app-input-custom>
+    <app-input-custom [value]="documento.estadoCodigo" title="Codigo Estado: " disabled=false
+      maxlength="1"></app-input-custom>
+    <app-input-custom [value]="documento.localizacionCodigo" title="Codigo Localização: " disabled=false
+      maxlength="1"></app-input-custom>
+    <app-input-custom [value]="documento.sistemaOrigenId" title="Sistema Origem: " disabled=false></app-input-custom>
 
     <!-- data servico -->
-    <app-calendar-custom value="" title="Data Serviço: "></app-calendar-custom>
+    <div class="row">
+      <div class="col">
+        <span>Data Serviço: </span>
+      </div>
+      <div class="col">
+        <p-calendar dateFormat="dd/mm/yy" [(ngModel)]="documento.fechaServicio"
+          [style]="{'width': '12.5rem'}"></p-calendar>
+      </div>
+    </div>
 
+    <p-panel header="Bultos" [toggleable]="true" [collapsed]="true" class="panelOT" [transitionOptions]="'500ms'">
 
+      <table>
+        <thead>
+          <tr>
+            <th>Precinto</th>
+            <th>Bolsa</th>
+            <th>Id</th>
+            <th><span class="crudDocumento" (click)="addBultoMemoria()">+</span></th>
+          </tr>
+        </thead>
+        <tbody *ngIf="bultos.length > 0">
+          <tr *ngFor="let bulto of documento.bultos; let i = index">
+            <td><input type="text" pInputText [(ngModel)]="bulto.precintoCodigo" [style]="{'width':'10rem'}" />
+            </td>
+            <td><input type="text" pInputText [(ngModel)]="bulto.bolsaCodigo" [style]="{'width':'10rem'}" /></td>
+            <td><input type="text" pInputText [(ngModel)]="bulto.id" [style]="{'width':'10rem'}" /></td>
+            <td><span class="crudDocumento" (click)="removerBultoMemoria(bulto)">-</span>
+          </tr>
+        </tbody>
+      </table>
+    </p-panel>
 
-    <p-panel header="Documentos Teste" [toggleable]="true" [collapsed]="true" class="panelOT"
+    <p-panel header="Documento Items" [toggleable]="true" [collapsed]="true" class="panelOT"
       [transitionOptions]="'500ms'">
 
       <!-- bultos/bolsas/ids independentes -->
       <table>
         <thead>
           <tr>
-            <th>Codigo</th>
-            <th>ID</th>
+            <th>Precinto</th>
+            <th>Bolsa</th>
+            <th>Id</th>
+            <th>Cantidad</th>
+            <th>Tipo Emb.</th>
+            <th>Divisa</th>
+            <th>Tipo Merc.</th>
+            <th>Valor</th>
             <th><span class="crudDocumento" (click)="addDocumentoMemoria()">+</span></th>
           </tr>
         </thead>
-        <tbody>
-          <tr *ngFor="let doc of otTeste.documents; let i = index">
-            <td><input type="text" pInputText [(ngModel)]="doc.documentCode" [placeholder]="i + 1" /></td>
-            <td><input type="text" pInputText [(ngModel)]="doc.documentId" [placeholder]="doc.documentId" /></td>
-            <td><span class="crudDocumento" (click)="removerDocumentoMemoria(doc)">-</span>
+        <tbody *ngIf="documento.documentoItens.length > 0">
+          <tr *ngFor="let docItem of documento.documentoItens; let i = index">
+            <td><input type="text" pInputText [(ngModel)]="docItem.bulto.precintoCodigo" [style]="{'width':'6rem'}" />
+            </td>
+            <td><input type="text" pInputText [(ngModel)]="docItem.bulto.bolsaCodigo" [style]="{'width':'6rem'}" /></td>
+            <td><input type="text" pInputText [(ngModel)]="docItem.bulto.id" [style]="{'width':'6rem'}" /></td>
+
+            <td><input type="text" pInputText [(ngModel)]="docItem.cantidad" [style]="{'width':'6rem'}" /></td>
+            <td><input type="text" pInputText [(ngModel)]="docItem.codTipoEmbalaje" [style]="{'width':'6rem'}" /></td>
+            <td><input type="text" pInputText [(ngModel)]="docItem.divisaCodigo" [style]="{'width':'6rem'}" /></td>
+            <td><input type="text" pInputText [(ngModel)]="docItem.tipoMercanciaCodigo" [style]="{'width':'6rem'}" />
+            </td>
+            <td><input type="text" pInputText [(ngModel)]="docItem.valor" [style]="{'width':'6rem'}" /></td>
+
+            <td><span class="crudDocumento" (click)="removerDocumentoMemoria(docItem)">-</span>
             </td>
           </tr>
         </tbody>

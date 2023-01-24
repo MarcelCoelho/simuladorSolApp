@@ -2,9 +2,14 @@
 
   <div class="titulo">
     <div class="row">
+
       <div class="col">
-        <h4>Emulador - <small> Grabar Documento Sol</small></h4>
+        <div class="logo">
+          <img src="../../../../assets/prosegurIcon.png" height="64px" width="120px" alt="Prosegur" />
+          <h4>Emulador - <small> Grabar Documento Sol</small></h4>
+        </div>
       </div>
+
     </div>
   </div>
 
@@ -17,9 +22,13 @@
 
       <div class="col">
 
-        <p-dropdown [options]="delegacoesDropDown" [(ngModel)]="delegacaoSelecionada" optionLabel="name"
-          optionValue="code" [style]="{'width':'10rem'}" (onkeypress)="onKeyUp($event)" [filter]="false"></p-dropdown>
-        <!-- <input type="text" pInputText placeholder="Delegacao Rota" [(ngModel)]="delegacaoRota" /> -->
+        <!-- <div *ngFor="let delegacao of delegacoesDropDown" class="field-checkbox">
+          <p-radioButton [inputId]="delegacao.code" name="category" [value]="delegacao"
+            [(ngModel)]="delegacaoSelecionada" [disabled]="delegacao.code === 'R'"></p-radioButton>
+          <label [for]="delegacao.code">{{delegacao.name}}</label>
+
+        </div> -->
+        <input type="text" pInputText placeholder="Delegacao Rota" [(ngModel)]="delegacaoRota" />
       </div>
 
       <div class="col">

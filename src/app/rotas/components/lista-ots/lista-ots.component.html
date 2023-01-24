@@ -1,4 +1,4 @@
-<div class="content">
+<div class="content" *ngIf="existeDadosRota">
 
   <p-splitter [style]="{'width': '100%'}" [panelSizes]="[50,50]" [minSizes]="[20,20]">
 
@@ -51,6 +51,13 @@
                       <h3>Envia Proc:. {{ ot.sendProcessGE }}</h3>
                     </div>
 
+                    <div class="separador"></div>
+
+                    <div class="otData">
+                      <h3>Documento(s):. <b>{{ ot.documents.length }}</b></h3>
+                    </div>
+
+
                   </div>
 
                   <div class="otCardvertical">
@@ -71,7 +78,8 @@
 
     <!-- documento por ot -->
     <ng-template pTemplate>
-      <app-documento-por-ot [ot]="otSelecionada"></app-documento-por-ot>
+      <app-documento-por-ot [ot]="otSelecionada"
+        (onDocumentoGravado)="receberDocumentoGravado($event)"></app-documento-por-ot>
     </ng-template>
   </p-splitter>
 

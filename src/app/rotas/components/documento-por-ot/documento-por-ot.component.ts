@@ -1,110 +1,174 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, EventEmitter, Output } from '@angular/core';
+import { documento, documentoItem, bulto } from '../../interfaces/documento.interface';
 import { document, workOrder } from '../../interfaces/rotas.interface';
+import { RotasService } from '../../services/rotas.service';
 
 @Component({
   selector: 'app-documento-por-ot',
   templateUrl: './documento-por-ot.component.html',
   styleUrls: ['./documento-por-ot.component.css']
 })
-export class DocumentoPorOtComponent implements OnInit {
+export class DocumentoPorOtComponent implements OnInit, OnChanges {
 
   @Input() ot!: workOrder;
 
-  otTeste!: workOrder;
+  documento!: documento;
+  bultos: bulto[] = [];
+  documentoItens!: documentoItem[];
 
-  dataRota!: Date;
+  @Output() onDocumentoGravado: EventEmitter<documento> = new EventEmitter();
 
-  //#region Variaveis Loop
-  bolsaCodigo1: string = "";
-  bolsaCodigo2: string = "";
-  bolsaCodigo3: string = "";
-  bolsaCodigo4: string = "";
-  bolsaCodigo5: string = "";
+  constructor(private rotasService: RotasService) {
 
-  id1: string = "";
-  id2: string = "";
-  id3: string = "";
-  id4: string = "";
-  id5: string = "";
-
-  precintoCodigo1: string = "";
-  precintoCodigo2: string = "";
-  precintoCodigo3: string = "";
-  precintoCodigo4: string = "";
-  precintoCodigo5: string = "";
-
-  divisaCodigo1: string = "";
-  divisaCodigo2: string = "";
-  divisaCodigo3: string = "";
-  divisaCodigo4: string = "";
-  divisaCodigo5: string = "";
-
-  tipoMercancia1: string = "";
-  tipoMercancia2: string = "";
-  tipoMercancia3: string = "";
-  tipoMercancia4: string = "";
-  tipoMercancia5: string = "";
-
-  valor1: string = "";
-  valor2: string = "";
-  valor3: string = "";
-  valor4: string = "";
-  valor5: string = "";
-
-  //#endregion
-
-  constructor() {
-    this.otTeste = this.listaInicialDocumentos;
   }
-  ngOnInit(): void {
-    console.log('OnInit documento por ot: ', this.ot);
+  ngOnChanges(changes: SimpleChanges): void {
+    this.documentoItens = this.listaInicialDocumentoItens;
+    this.bultos = this.listaInicialBultos;
+    this.documento = this.documentoInicial;
   }
 
-  get listaInicialDocumentos(): workOrder {
-    const ot: workOrder = {
-      documents: [
+  ngOnInit(): void { }
+
+  private criarBultoVazio(): bulto {
+    const bulto: bulto = {
+      bolsaCodigo: '',
+      id: '',
+      precintoCodigo: ''
+    };
+    return bulto;
+  }
+
+  get documentoInicial(): documento {
+
+    const documento: documento =
+    {
+      otId: this.ot !== undefined ? (this.ot.workOrderId || '') : '',
+      bolSinMovimiento: false,
+      paisCodigo: '',
+      canalCodigo: '',
+      codigoPuesto: '',
+      codigoUsuario: '',
+      delegacionCodigo: this.ot !== undefined ? (this.ot.branchGECode || '') : '',
+      delegacionLocalizacionCodigo: this.ot !== undefined ? (this.ot.branchGECode || '') : '',
+      documentoCodigo: '',
+      documentoCodigoCliente: '',
+      documentoCodigoSerie: '',
+      documentoId: '',
+      documentoImporte: [],
+      documentoItens: this.documentoItens,
+      emisorDocumentoCodigo: '1',
+      empleoCodigo: '2',
+      entidadGECodigo: this.ot !== undefined ? (this.ot.billingEntityGECode || '') : '',
+      entidadLVCodigo: this.ot !== undefined ? (this.ot.billingEntityGECode || '') : '',
+      estadoCodigo: '1',
+      fechaServicio: new Date(),
+      fechaEntradaDocumento: new Date(),
+      localizacionCodigo: '1',
+      observacion: '',
+      servicioContratadoCodigo: '',
+      subcanalCodigo: '',
+      bultos: this.bultos,
+      sistemaOrigenId: 'GENESIS'
+    };
+    return documento;
+  }
+
+  get listaInicialDocumentoItens(): documentoItem[] {
+
+    const documentoItens: documentoItem[] =
+      [
         {
-          referenceID: '1',
-          documentCode: '',
-          documentId: '',
-          bultos: []
+          bulto: this.criarBultoVazio(),
+          cantidad: 0,
+          codTipoEmbalaje: '',
+          divisaCodigo: '',
+          tipoMercanciaCodigo: '',
+          valor: 0
         },
         {
-          referenceID: '2',
-          documentCode: '',
-          documentId: '',
-          bultos: [
-            {
-              bolsaCodigo: '',
-              id: '',
-              precintoCodigo: ''
-            }
-          ]
+          bulto: this.criarBultoVazio(),
+          cantidad: 0,
+          codTipoEmbalaje: '',
+          divisaCodigo: '',
+          tipoMercanciaCodigo: '',
+          valor: 0
         }
-      ]
-    };
-    return ot;
+      ];
+
+
+    return documentoItens;
   }
+
+  get listaInicialBultos(): bulto[] {
+    const bultos: bulto[] =
+
+      [
+        {
+          precintoCodigo: '',
+          bolsaCodigo: '',
+          id: ''
+        },
+        {
+          precintoCodigo: '',
+          bolsaCodigo: '',
+          id: ''
+        },
+      ];
+
+    return bultos;
+  }
+
 
   addDocumentoMemoria() {
-    const doc: document = {
-      referenceID: (this.otTeste.documents.length + 1).toString(),
-      documentCode: '',
-      documentId: '',
-      bultos: []
-    }
+    const bulto: bulto = {
+      bolsaCodigo: '',
+      id: '',
+      precintoCodigo: ''
+    };
+    const documentoItem: documentoItem =
 
-    this.otTeste.documents.push(doc);
+    {
+      bulto: bulto,
+      cantidad: 0,
+      codTipoEmbalaje: '',
+      divisaCodigo: '',
+      tipoMercanciaCodigo: '',
+      valor: 0
+    };
+
+    this.documento.documentoItens.push(documentoItem);
   }
 
-  removerDocumentoMemoria(documento: document) {
-    const index = this.otTeste.documents.indexOf(documento);
+  removerDocumentoMemoria(documentoItem: documentoItem) {
+    const index = this.documento.documentoItens.indexOf(documentoItem);
+    this.documento.documentoItens.splice(index, 1);
+  }
 
-    this.otTeste.documents.splice(index, 1);
+  addBultoMemoria() {
+    const bulto = this.criarBultoVazio();
+    this.documento.bultos.push(bulto);
+  }
+
+  removerBultoMemoria(bulto: bulto) {
+    const index = this.documento.bultos.indexOf(bulto);
+    this.documento.bultos.splice(index, 1);
   }
 
   guardarDocumentoBase() {
-    console.log('doc1: ', this.otTeste.documents[0].documentCode, 'doc2: ', this.otTeste.documents[1].documentCode)
+    this.rotasService.gravarDocumento(this.documento)
+
+      .subscribe({
+        next: (resp: any) => {
+          this.onDocumentoGravado.emit(this.documento);
+
+          this.documentoItens = this.listaInicialDocumentoItens;
+          this.bultos = this.listaInicialBultos;
+          this.documento = this.documentoInicial;
+        },
+        error: (e) => {
+          alert('Erro ao gravar documento: ' + e.status + ' - ' + e.error);
+        }
+      })
   }
 
 }

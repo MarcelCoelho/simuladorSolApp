@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
-import { meses, recuperarDelegacoesLocalStorage, gravarDelegacoesLocalStore } from '../../../shared/utilities/dados';
+import { meses } from '../../../shared/utilities/dados';
 import { RotasService } from '../../services/rotas.service';
-import { branch, IRota, delegacaoDropDown } from '../../interfaces/rotas.interface';
+import { IRota } from '../../interfaces/rotas.interface';
+import { catchError, Observable, throwError } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-menu-filtro',
@@ -11,59 +13,32 @@ import { branch, IRota, delegacaoDropDown } from '../../interfaces/rotas.interfa
 export class MenuFiltroComponent implements OnInit {
   codigoRota: string = '';
   dataRota!: Date;
-
-
-
-  private delegacoes: branch[] = [];
-  delegacoesDropDown: delegacaoDropDown[] = [];
-  delegacaoSelecionada: string = "";
+  delegacaoRota: string = "";
 
   @Output() onBuscar: EventEmitter<IRota> = new EventEmitter();
 
   constructor(private rotasService: RotasService) {
 
   }
-  ngOnInit(): void {
-    this.delegacoes = recuperarDelegacoesLocalStorage();
-    if (this.delegacoes.length === 0) {
-      this.buscarDelegacoes();
-    }
-
-    this.delegacoes.forEach(delegacao => {
-      const del: delegacaoDropDown = {
-        name: delegacao.description,
-        code: delegacao.flag
-      };
-      this.delegacoesDropDown.push(del);
-      console.log(this.delegacoesDropDown);
-    });
-
-  }
-
-  buscarDelegacoes() {
-    this.rotasService.recuperarDelegacoes()
-      .subscribe((resp: any) => {
-        console.log(resp.data);
-        this.delegacoes = resp.data;
-        gravarDelegacoesLocalStore(this.delegacoes);
-      });
-  }
+  ngOnInit(): void { }
 
   buscarRuta() {
-    if (this.dataRota === undefined || this.codigoRota.trim() === '' || this.delegacaoSelecionada === null) {
+
+    if (this.dataRota === undefined || this.codigoRota.trim() === '' || this.delegacaoRota.trim() === '') {
       alert('Todos filtros são obrigatórios');
       return;
     }
     const dataRotaConcatenada = this.converterDataEmString();
-    // this.rotasService.recuperarDadosRota(this.codigoRota, this.delegacaoRota, dataRotaConcatenada)
-    //   .subscribe((resp: IRota) => {
-    //     this.onBuscar.emit(resp)
-    //   });
 
-    this.rotasService.recuperarDadosRota(this.codigoRota, this.delegacaoSelecionada, dataRotaConcatenada)
-      .subscribe((resp: any) => {
-        this.onBuscar.emit(resp.data)
-      });
+    this.rotasService.recuperarDadosRota(this.codigoRota, this.delegacaoRota, dataRotaConcatenada)
+      .subscribe({
+        next: (resp: any) => {
+          this.onBuscar.emit(resp.data)
+        },
+        error: (e) => {
+          alert('Erro ao buscar rota: ' + e.status + ' - ' + e.error);
+        }
+      })
   }
 
   private converterDataEmString(): string {
@@ -79,13 +54,5 @@ export class MenuFiltroComponent implements OnInit {
       month = "0" + month;
 
     return (year + '-' + month + '-' + day);
-  }
-
-  onSelecionarDelegacao() {
-    console.log(this.delegacaoSelecionada);
-  }
-
-  onKeyUp(event: any) {
-    console.log(event);
   }
 }

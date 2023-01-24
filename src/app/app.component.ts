@@ -18,14 +18,4 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  // changeRutaCodigo() {
-  //   console.log(this.rutaCodigo);
-  // }
-
-  // changeValueDate() {
-  //   console.log(this.fechaActual);
-  // }
-
-
-
 }

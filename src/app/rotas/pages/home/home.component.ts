@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { documento } from '../../interfaces/documento.interface';
 import { IRota, workOrder } from '../../interfaces/rotas.interface';
 
 @Component({
@@ -23,7 +24,10 @@ export class HomeComponent implements OnInit {
       routeStatusCode: 0,
       routeStatusDescription: ""
     },
-    workOrders: []
+    workOrders: [],
+    isSuccess: true,
+    message: '',
+    status: ''
   };
 
   ot!: workOrder;
@@ -35,12 +39,11 @@ export class HomeComponent implements OnInit {
 
     if (dadosRota !== undefined && dadosRota !== null) {
       this.data = JSON.parse(dadosRota);
-      console.log(this.data);
+      console.log('data: ', this.data);
     }
   }
 
   receberDadosRota(dadosRota: IRota) {
-    console.log(dadosRota);
     localStorage.removeItem("datosRota");
     localStorage.setItem('dadosRota', JSON.stringify(dadosRota));
     this.data = dadosRota;
@@ -48,6 +51,6 @@ export class HomeComponent implements OnInit {
 
   receberOtSelecionada(ot: workOrder) {
     this.ot = ot;
-    console.log('recebido: ', this.ot);
   }
+
 }
