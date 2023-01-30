@@ -1,19 +1,57 @@
 .formulario {
   display: flex;
   flex-direction: column;
-
+  justify-content: flex-start;
+  align-items: stretch;
   padding: 1rem;
-  gap: 0.2rem;
+  gap: 0.7rem;
 }
 
-.row {
-  justify-content: center;
-  align-items: center;
+.campo {
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  /* width: 80%; */
 }
 
-button {
+.campo span {
+  width: 10rem;
+}
+
+.campo input {
+  width: 30rem;
+}
+
+.campoData {
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  width: 80%;
+}
+
+.campoData span {
+  width: 10rem;
+}
+
+.campoData input {
+  width: 30rem;
+}
+
+.botaoGravar {
+  display: flex;
+  justify-content: right;
   margin-top: 2rem;
-  width: 100%;
+  /* width: 100%; */
+}
+
+.botaoGravar button {
+  font-weight: bold;
+}
+
+.painelDocumentoItens td,
+input {
+  font-size: 0.7rem;
+  width: 5rem;
 }
 
 .crudDocumento {
@@ -24,4 +62,120 @@ button {
 
 .crudDocumento:hover {
   filter: brightness(0.5);
+}
+
+@media screen and (max-width:1920px) {
+  .painelBultos {
+    /* width: 42rem; */
+  }
+
+  .painelBultos input {
+    width: 12rem;
+  }
+
+  .painelDocumentoItens input {
+    /* font-size: 0.6rem; */
+    width: 6rem;
+  }
+}
+
+@media screen and (max-width:1080px) {
+
+  .formulario {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: left;
+    padding: 1rem;
+    gap: 0.4rem;
+  }
+
+  .campo span {
+    width: 10rem;
+    font-size: 0.8rem;
+  }
+
+  .campo input {
+    width: 26rem;
+  }
+
+  .campoData span {
+    width: 10rem;
+    font-size: 0.8rem;
+  }
+
+  .campoData input {
+    width: 24rem;
+  }
+
+  .painelBultos {
+    width: 36rem;
+  }
+
+  .painelBultos input {
+    width: 10rem;
+  }
+
+  .painelDocumentoItens {
+    width: 36rem;
+  }
+
+  .painelDocumentoItens small {
+    font-size: 0.6rem;
+  }
+
+  .painelDocumentoItens input {
+    font-size: 0.6rem;
+    width: 3.5rem;
+  }
+}
+
+@media screen and (max-width:850px) {
+  .campo span {
+    width: 8rem;
+    font-size: 0.8rem;
+  }
+
+  .campo input {
+    width: 20rem;
+  }
+
+  .campoData {
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    /* font-size: 0.8rem; */
+    width: 100%;
+  }
+
+  .campoData span {
+    width: 8rem;
+    font-size: 0.8rem;
+  }
+
+  .campoData input {
+    font-size: 0.8rem;
+    width: 20rem;
+  }
+
+  .painelBultos {
+    width: 28rem;
+  }
+
+  .painelBultos input {
+    width: 8rem;
+  }
+
+  .painelDocumentoItens {
+    width: 28rem;
+  }
+
+  .painelDocumentoItens small {
+    font-size: 0.6rem;
+  }
+
+  .painelDocumentoItens input {
+    font-size: 0.4rem;
+    width: 2.8rem;
+  }
 }

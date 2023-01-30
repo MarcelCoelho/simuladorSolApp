@@ -18,9 +18,11 @@ export class DocumentoPorOtComponent implements OnInit, OnChanges {
 
   @Output() onDocumentoGravado: EventEmitter<documento> = new EventEmitter();
 
-  constructor(private rotasService: RotasService) {
-
+  get getClassInputNumber(): string {
+    return "{'width':'5rem', 'heigth':'1rem', 'font-size':'0.7rem'}";
   }
+
+  constructor(private rotasService: RotasService) { }
   ngOnChanges(changes: SimpleChanges): void {
     this.documentoItens = this.listaInicialDocumentoItens;
     this.bultos = this.listaInicialBultos;
@@ -169,6 +171,10 @@ export class DocumentoPorOtComponent implements OnInit, OnChanges {
           alert('Erro ao gravar documento: ' + e.status + ' - ' + e.error);
         }
       })
+  }
+
+  get getInputNumberCss() {
+    return 'inputNumberCss';
   }
 
 }

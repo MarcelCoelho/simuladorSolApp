@@ -18,6 +18,7 @@ import { FieldsetModule } from 'primeng/fieldset';
 import { DropdownModule } from 'primeng/dropdown';
 import { ListboxModule } from 'primeng/listbox';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     DropdownModule,
     ListboxModule,
     RadioButtonModule,
+    InputNumberModule,
 
     SharedModule
   ],

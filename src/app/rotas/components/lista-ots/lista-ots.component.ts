@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { document, documentItem, IRota, workOrder, breakdown, container } from '../../interfaces/rotas.interface';
+import { Component, EventEmitter, Input, Output, HostListener, OnInit } from '@angular/core';
+import { document, documentItem, IRota, workOrder, container } from '../../interfaces/rotas.interface';
 import { documento, documentoItem, bulto } from '../../interfaces/documento.interface';
 
 @Component({
@@ -7,7 +7,9 @@ import { documento, documentoItem, bulto } from '../../interfaces/documento.inte
   templateUrl: './lista-ots.component.html',
   styleUrls: ['./lista-ots.component.css']
 })
-export class ListaOtsComponent {
+export class ListaOtsComponent implements OnInit {
+
+  orientacaoSplitter: string = '';
 
   @Input() data!: IRota;
 
@@ -20,9 +22,25 @@ export class ListaOtsComponent {
     return this.data?.workOrders?.length > 0;
   }
 
+  definirOrientacaoSplitter(): void {
+    if (window.innerWidth < 850)
+      this.orientacaoSplitter = 'vertical';
+    else
+      this.orientacaoSplitter = 'horizontal';
+  }
+
   constructor() {
 
   }
+  ngOnInit(): void {
+    this.definirOrientacaoSplitter();
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onWindowResize() {
+    this.definirOrientacaoSplitter();
+  }
+
 
   ativarOT(ot: workOrder) {
     this.otSelecionada = ot;
@@ -101,6 +119,10 @@ export class ListaOtsComponent {
       originalSeal: ''
     };
     return container;
+  }
+
+  verDetalheDocumento(ot: workOrder) {
+    alert(ot.documents[0].number)
   }
 
 }

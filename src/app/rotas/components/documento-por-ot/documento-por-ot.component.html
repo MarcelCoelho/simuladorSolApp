@@ -2,136 +2,135 @@
 
   <div class="formulario">
 
-    <!-- identificador OT -->
-    <div class="row">
-      <div class="col">
-        <span>Identificador OT:</span>
-      </div>
-      <div class="col">
-        <input type="text" pInputText [(ngModel)]="documento.otId" [disabled]="true" />
-      </div>
+    <div class="campo">
+      <span>Id Ot: </span>
+      <input type="text" pInputText [(ngModel)]="documento.otId" [disabled]="true" />
     </div>
 
-    <div class="row">
-      <div class="col">
-        <span>Delegação: </span>
-      </div>
-      <div class="col">
-        <input type="text" pInputText [(ngModel)]="documento.delegacionCodigo" [disabled]="true" />
-      </div>
+    <div class="campo">
+      <span>Delegação: </span>
+      <input type="text" pInputText [(ngModel)]="documento.delegacionCodigo" [disabled]="true" />
     </div>
 
-    <div class="row">
-      <div class="col">
-        <span>Codigo Cliente: </span>
-      </div>
-      <div class="col">
-        <input type="text" pInputText [(ngModel)]="documento.entidadGECodigo" [disabled]="true" />
-      </div>
+    <!-- codigoCliente -->
+    <div class="campo">
+      <span>Codigo Cliente: </span>
+      <input type="text" pInputText [(ngModel)]="documento.entidadGECodigo" [disabled]="true" />
     </div>
 
-    <div class="row">
-      <div class="col">
-        <span>Codigo Documento: </span>
-      </div>
-      <div class="col">
-        <input type="text" pInputText [(ngModel)]="documento.documentoCodigo" maxlength="50" />
-      </div>
+    <!-- codigo documento -->
+    <div class="campo">
+      <span>Cod. Documento: </span>
+      <input type="text" pInputText [(ngModel)]="documento.documentoCodigo" maxlength="50" />
     </div>
 
-    <div class="row">
-      <div class="col">
-        <span>ID Documento: </span>
-      </div>
-      <div class="col">
-        <input type="text" pInputText [(ngModel)]="documento.documentoId" maxlength="50" />
-      </div>
+    <!-- id documento -->
+    <div class="campo">
+      <span>ID Documento: </span>
+      <input type="text" pInputText [(ngModel)]="documento.documentoId" maxlength="50" />
     </div>
 
-    <div class="row">
-      <div class="col">
-        <span>Pais: </span>
-      </div>
-      <div class="col">
-        <input type="text" pInputText [(ngModel)]="documento.paisCodigo" maxlength="2" />
-      </div>
+    <!-- pais -->
+    <div class="campo">
+      <span>Pais: </span>
+      <input type="text" pInputText [(ngModel)]="documento.paisCodigo" maxlength="2" />
     </div>
 
-    <app-input-custom [value]="documento.empleoCodigo" title="Codigo Empleo: " disabled=false
-      maxlength="1"></app-input-custom>
-    <app-input-custom [value]="documento.emisorDocumentoCodigo" title="Emissor Documento: " disabled=false
-      maxlength="1"></app-input-custom>
-    <app-input-custom [value]="documento.estadoCodigo" title="Codigo Estado: " disabled=false
-      maxlength="1"></app-input-custom>
-    <app-input-custom [value]="documento.localizacionCodigo" title="Codigo Localização: " disabled=false
-      maxlength="1"></app-input-custom>
-    <app-input-custom [value]="documento.sistemaOrigenId" title="Sistema Origem: " disabled=false></app-input-custom>
+    <div class="campo">
+      <span>Codigo Empleo: </span>
+      <input type="text" pInputText [(ngModel)]="documento.empleoCodigo" maxlength="1" />
+    </div>
+
+    <div class="campo">
+      <span>Codigo Empleo: </span>
+      <input type="text" pInputText [(ngModel)]="documento.empleoCodigo" maxlength="1" />
+    </div>
+
+    <div class="campo">
+      <span>Emissor: </span>
+      <input type="text" pInputText [(ngModel)]="documento.emisorDocumentoCodigo" maxlength="1" />
+    </div>
+
+    <div class="campo">
+      <span>Codigo Estado: </span>
+      <input type="text" pInputText [(ngModel)]="documento.estadoCodigo" maxlength="1" />
+    </div>
+
+    <div class="campo">
+      <span>Localização: </span>
+      <input type="text" pInputText [(ngModel)]="documento.localizacionCodigo" maxlength="1" />
+    </div>
+
+    <div class="campo">
+      <span>Sistema Origem: </span>
+      <input type="text" pInputText [(ngModel)]="documento.sistemaOrigenId" />
+    </div>
 
     <!-- data servico -->
-    <div class="row">
-      <div class="col">
-        <span>Data Serviço: </span>
-      </div>
-      <div class="col">
-        <p-calendar dateFormat="dd/mm/yy" [(ngModel)]="documento.fechaServicio"
-          [style]="{'width': '12.5rem'}"></p-calendar>
-      </div>
+    <div class="campoData">
+      <span>Data Serviço: </span>
+      <p-calendar dateFormat="dd/mm/yy" [(ngModel)]="documento.fechaServicio"></p-calendar>
     </div>
 
-    <p-panel header="Bultos" [toggleable]="true" [collapsed]="true" class="panelOT" [transitionOptions]="'500ms'">
+    <p-panel header="Bultos" [toggleable]="true" [collapsed]="true" class="painelBultos"
+      [style]="{'font-size':'0.9rem'}" [transitionOptions]="'500ms'">
 
       <table>
         <thead>
           <tr>
-            <th>Precinto</th>
-            <th>Bolsa</th>
-            <th>Id</th>
+            <th><small>Precinto</small></th>
+            <th><small>Bolsa</small></th>
+            <th><small>Id</small></th>
             <th><span class="crudDocumento" (click)="addBultoMemoria()">+</span></th>
           </tr>
         </thead>
         <tbody *ngIf="bultos.length > 0">
           <tr *ngFor="let bulto of documento.bultos; let i = index">
-            <td><input type="text" pInputText [(ngModel)]="bulto.precintoCodigo" [style]="{'width':'10rem'}" />
+            <td><input type="text" pInputText [(ngModel)]="bulto.precintoCodigo" />
             </td>
-            <td><input type="text" pInputText [(ngModel)]="bulto.bolsaCodigo" [style]="{'width':'10rem'}" /></td>
-            <td><input type="text" pInputText [(ngModel)]="bulto.id" [style]="{'width':'10rem'}" /></td>
+            <td><input type="text" pInputText [(ngModel)]="bulto.bolsaCodigo" /></td>
+            <td><input type="text" pInputText [(ngModel)]="bulto.id" /></td>
             <td><span class="crudDocumento" (click)="removerBultoMemoria(bulto)">-</span>
           </tr>
         </tbody>
       </table>
     </p-panel>
 
-    <p-panel header="Documento Items" [toggleable]="true" [collapsed]="true" class="panelOT"
-      [transitionOptions]="'500ms'">
+    <p-panel header="Documento Items" [toggleable]="true" [collapsed]="true" class="painelDocumentoItens"
+      [transitionOptions]="'500ms'" [style]="{'font-size':'0.9rem'}">
 
       <!-- bultos/bolsas/ids independentes -->
       <table>
         <thead>
           <tr>
-            <th>Precinto</th>
-            <th>Bolsa</th>
-            <th>Id</th>
-            <th>Cantidad</th>
-            <th>Tipo Emb.</th>
-            <th>Divisa</th>
-            <th>Tipo Merc.</th>
-            <th>Valor</th>
+            <th>
+              <small>Precinto</small>
+            </th>
+            <th><small>Bolsa</small></th>
+            <th><small>Id</small></th>
+            <th><small>Cantidad</small></th>
+            <th><small>Tipo Emb.</small></th>
+            <th><small>Divisa</small></th>
+            <th><small>Tipo Merc.</small></th>
+            <th><small>Valor</small></th>
             <th><span class="crudDocumento" (click)="addDocumentoMemoria()">+</span></th>
           </tr>
         </thead>
         <tbody *ngIf="documento.documentoItens.length > 0">
           <tr *ngFor="let docItem of documento.documentoItens; let i = index">
-            <td><input type="text" pInputText [(ngModel)]="docItem.bulto.precintoCodigo" [style]="{'width':'6rem'}" />
+            <td><input type="text" pInputText [(ngModel)]="docItem.bulto.precintoCodigo" />
             </td>
-            <td><input type="text" pInputText [(ngModel)]="docItem.bulto.bolsaCodigo" [style]="{'width':'6rem'}" /></td>
-            <td><input type="text" pInputText [(ngModel)]="docItem.bulto.id" [style]="{'width':'6rem'}" /></td>
+            <td><input type="text" pInputText [(ngModel)]="docItem.bulto.bolsaCodigo" /></td>
+            <td><input type="text" pInputText [(ngModel)]="docItem.bulto.id" /></td>
 
-            <td><input type="text" pInputText [(ngModel)]="docItem.cantidad" [style]="{'width':'6rem'}" /></td>
-            <td><input type="text" pInputText [(ngModel)]="docItem.codTipoEmbalaje" [style]="{'width':'6rem'}" /></td>
-            <td><input type="text" pInputText [(ngModel)]="docItem.divisaCodigo" [style]="{'width':'6rem'}" /></td>
-            <td><input type="text" pInputText [(ngModel)]="docItem.tipoMercanciaCodigo" [style]="{'width':'6rem'}" />
+            <td><input type="text" pInputText [(ngModel)]="docItem.cantidad" /></td>
+            <td><input type="text" pInputText [(ngModel)]="docItem.codTipoEmbalaje" /></td>
+            <td><input type="text" pInputText [(ngModel)]="docItem.divisaCodigo" /></td>
+            <td><input type="text" pInputText [(ngModel)]="docItem.tipoMercanciaCodigo" />
             </td>
-            <td><input type="text" pInputText [(ngModel)]="docItem.valor" [style]="{'width':'6rem'}" /></td>
+            <td><input type="text" pInputText [(ngModel)]="docItem.valor" /></td>
+            <!-- <td><p-inputNumber [(ngModel)]="docItem.valor" mode="decimal" [minFractionDigits]="2"
+                [maxFractionDigits]="2" [inputStyle]="getClassInputNumber"></p-inputNumber></td> -->
 
             <td><span class="crudDocumento" (click)="removerDocumentoMemoria(docItem)">-</span>
             </td>
@@ -140,9 +139,9 @@
       </table>
     </p-panel>
 
-
-    <button pButton type="button" icon="pi pi-check" iconPos="left" (click)="guardarDocumentoBase()">Gravar
-      Documento</button>
-
+    <div class="botaoGravar">
+      <button pButton type="button" (click)="guardarDocumentoBase()">Gravar
+        Documento</button>
+    </div>
   </div>
 </div>

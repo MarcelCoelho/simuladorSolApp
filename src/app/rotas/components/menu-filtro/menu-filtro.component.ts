@@ -55,4 +55,8 @@ export class MenuFiltroComponent implements OnInit {
 
     return (year + '-' + month + '-' + day);
   }
+
+  get classeCalendario() {
+    return 'calendar';
+  }
 }

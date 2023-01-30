@@ -1,44 +1,24 @@
 <div class="menu">
 
   <div class="titulo">
-    <div class="row">
-
-      <div class="col">
-        <div class="logo">
-          <img src="../../../../assets/prosegurIcon.png" height="64px" width="120px" alt="Prosegur" />
-          <h4>Emulador - <small> Grabar Documento Sol</small></h4>
-        </div>
-      </div>
+    <div class="logo">
+      <img src="../../../../assets/prosegurIcon-black.png" alt="Prosegur" />
+      <h4>Emulador Sol</h4>
 
     </div>
   </div>
 
   <div class="filtro">
-    <div class="row">
 
-      <div class="col">
-        <input type="text" pInputText placeholder="Codigo Rota" [(ngModel)]="codigoRota" />
-      </div>
+    <div class="filtroCorpo">
+      <input type="text" pInputText placeholder="Codigo Rota" [(ngModel)]="codigoRota" />
 
-      <div class="col">
+      <input type="text" pInputText placeholder="Delegacao Rota" [(ngModel)]="delegacaoRota" />
 
-        <!-- <div *ngFor="let delegacao of delegacoesDropDown" class="field-checkbox">
-          <p-radioButton [inputId]="delegacao.code" name="category" [value]="delegacao"
-            [(ngModel)]="delegacaoSelecionada" [disabled]="delegacao.code === 'R'"></p-radioButton>
-          <label [for]="delegacao.code">{{delegacao.name}}</label>
+      <p-calendar styleCalss=".ui-calendar .ui-calendar-button" dateFormat="dd/mm/yy" placeholder="Data Rota"
+        [(ngModel)]="dataRota"></p-calendar>
 
-        </div> -->
-        <input type="text" pInputText placeholder="Delegacao Rota" [(ngModel)]="delegacaoRota" />
-      </div>
-
-      <div class="col">
-        <p-calendar dateFormat="dd/mm/yy" placeholder="Data Rota" [(ngModel)]="dataRota"></p-calendar>
-      </div>
-
-      <div class="col">
-        <button pButton type="button" label="Buscar Ruta" (click)="buscarRuta()"></button>
-      </div>
-
+      <button pButton type="button" label="Buscar Ruta" (click)="buscarRuta()"></button>
     </div>
   </div>
 

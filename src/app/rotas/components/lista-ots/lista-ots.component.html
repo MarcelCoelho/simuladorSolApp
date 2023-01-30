@@ -1,6 +1,6 @@
 <div class="content" *ngIf="existeDadosRota">
 
-  <p-splitter [style]="{'width': '100%'}" [panelSizes]="[50,50]" [minSizes]="[20,20]">
+  <p-splitter [style]="{'width': '100%'}" [layout]="orientacaoSplitter" [panelSizes]="[50,50]" [minSizes]="[20,20]">
 
     <!-- lista de ots -->
     <ng-template pTemplate>
@@ -20,7 +20,7 @@
 
               <div *ngFor="let ot of data.workOrders">
 
-                <div *ngIf="lap.lapNumber === ot.lapNumber" (click)="ativarOT(ot)" [class]="getClasseCSS(ot)">
+                <div *ngIf="lap.lapNumber === ot.lapNumber" (dblclick)="ativarOT(ot)" [class]="getClasseCSS(ot)">
 
                   <div class="otCardhorizontal">
 
@@ -55,8 +55,12 @@
 
                     <div class="otData">
                       <h3>Documento(s):. <b>{{ ot.documents.length }}</b></h3>
+
                     </div>
 
+                    <div class="otData">
+                      <h3 [style]="{'font-size':'1.1rem'}" (click)="verDetalheDocumento( ot )">...</h3>
+                    </div>
 
                   </div>
 
